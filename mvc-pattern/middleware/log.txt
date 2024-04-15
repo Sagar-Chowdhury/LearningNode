@@ -74,3 +74,47 @@ GET /api/users
 GET /api/users/661c2ba8b48a0f3a458f347d
 --Response--
 200
+--Request--
+GET /api/users
+--Response--
+200
+--Request--
+GET /api/users/661c2d201a4dcc5de1de06db
+--Response--
+200
+--Request--
+GET /api/users/5
+--Response--
+200
+--Request--
+GET /api/users/5
+--Response--
+200
+--Request--
+GET /api/users/5
+--Response--
+200
+--Request--
+GET /api/users/5
+--Response--
+200
+--Request--
+GET /api/users
+--Response--
+200
+--Request--
+GET /api/users/661c2ba8b48a0f3a458f347d
+--Response--
+200
+--Request--
+GET /api/users/661c2ba8b48a0f3a458f347d
+--Response--
+200
+--Request--
+DELETE /api/users/661c2ba8b48a0f3a458f347d
+--Response--
+200
+--Request--
+GET /api/users/661c2ba8b48a0f3a458f347d
+--Response--
+200

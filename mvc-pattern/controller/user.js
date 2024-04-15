@@ -31,7 +31,7 @@ async function handleCreateUser(req, res) {
 
 async function handleGetUserById(req, res) {
   const id = req.params.id;
-  const userById = await User.findById({ '_id': id });
+  const userById = await User.findById({ _id: id });
 
   if (!userById)
     res.status(404).send("No such user found"); // Send error if no match

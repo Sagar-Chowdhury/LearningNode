@@ -17,4 +17,9 @@ app.use(logReqRes("log.txt"));
 /** Routing Part */
 app.use("/api/users", router);
 
+/**Error catch at processLevel */
+process.on('uncaughtException', function (err) {
+    console.log(err);
+}); 
+
 app.listen(PORT, () => console.log(`Server Listening on PORT:${PORT}`));
