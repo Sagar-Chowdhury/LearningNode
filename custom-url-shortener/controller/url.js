@@ -1,3 +1,4 @@
+const express = require("express");
 const URL = require("../models/url");
 const ShortUniqueId = require("short-unique-id");
 
@@ -12,10 +13,10 @@ async function generateShortId(req, res) {
     shortId: shortId,
     redirected_url: redirectURL,
   });
-  return res
-    .status(201)
-    .json({ response: `Short id created for URL ${redirectURL}`,
-   shortIdGenerated:`${shortId}` });
+  return res.status(201).json({
+    response: `Short id created for URL ${redirectURL}`,
+    shortIdGenerated: `${shortId}`,
+  });
 }
 
 async function getUrlByShortId(req, res) {
@@ -24,20 +25,17 @@ async function getUrlByShortId(req, res) {
     return res.status(400).json({ response: "No Valid ShortId was found" });
   const filter = { shortId: currShortId };
   const newTimestamp = Date.now();
-  
-  
+
   try {
     const result = await URL.findOneAndUpdate(
-      {shortId:currShortId},
+      { shortId: currShortId },
       { $push: { visitHistory: { timestamp: Date.now() } } },
-      {upsert: true, new : true} 
+      { upsert: true, new: true }
     );
     if (!result) {
       return res.status(400).json({ response: "Invalid Short-id specified." });
-    }
-    else
-    {
-      const redirectToURL = result.redirected_url
+    } else {
+      const redirectToURL = result.redirected_url;
       return res.status(200).redirect(redirectToURL);
     }
   } catch (err) {
@@ -47,25 +45,31 @@ async function getUrlByShortId(req, res) {
 }
 
 async function getAnalyticsByShortId(req, res) {
-   const currShortId = req.params.id;
+  const currShortId = req.params.id;
   if (!currShortId)
     return res.status(400).json({ response: "No Valid ShortId was found" });
-   const filter = { shortId: currShortId }
-   const result = await URL.find(filter)
-   console.log(result);
-   if(!result){
-      res.status(400).json({response:" No Such Short-Id found "})
-   }
-   else
-   {
-      const historyData = result[0].visitHistory
-      res.status(200).json( {"clicks":`${historyData.length}` })
-   }
+  const filter = { shortId: currShortId };
+  const result = await URL.find(filter);
+  console.log(result);
+  if (!result) {
+    res.status(400).json({ response: " No Such Short-Id found " });
+  } else {
+    const historyData = result[0].visitHistory;
+    res.status(200).json({ clicks: `${historyData.length}` });
+  }
+}
 
+async function renderHomepage(req, res) {
+  const allData = await URL.find({});
+  console.log(allData);
+  res.render("home", {
+    data: allData,
+  });
 }
 
 module.exports = {
   generateShortId,
   getUrlByShortId,
   getAnalyticsByShortId,
+  renderHomepage,
 };
