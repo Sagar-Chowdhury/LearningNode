@@ -1,4 +1,3 @@
-const express = require("express");
 const URL = require("../models/url");
 const ShortUniqueId = require("short-unique-id");
 
@@ -13,19 +12,20 @@ async function generateShortId(req, res) {
     shortId: shortId,
     redirected_url: redirectURL,
   });
-  return res.status(201).json({
-    response: `Short id created for URL ${redirectURL}`,
-    shortIdGenerated: `${shortId}`,
-  });
+  return res.render("home",{
+    id:shortId
+  })
+  // return res.status(201).json({
+  //   response: `Short id created for URL ${redirectURL}`,
+  //   shortIdGenerated: `${shortId}`,
+  // });
 }
 
 async function getUrlByShortId(req, res) {
   const currShortId = req.params.id;
   if (!currShortId)
     return res.status(400).json({ response: "No Valid ShortId was found" });
-  const filter = { shortId: currShortId };
-  const newTimestamp = Date.now();
-
+  
   try {
     const result = await URL.findOneAndUpdate(
       { shortId: currShortId },
@@ -51,7 +51,7 @@ async function getAnalyticsByShortId(req, res) {
   const filter = { shortId: currShortId };
   const result = await URL.find(filter);
   console.log(result);
-  if (!result) {
+  if (!result || result.length==0 ) {
     res.status(400).json({ response: " No Such Short-Id found " });
   } else {
     const historyData = result[0].visitHistory;
@@ -59,17 +59,21 @@ async function getAnalyticsByShortId(req, res) {
   }
 }
 
-async function renderHomepage(req, res) {
+async function renderAnalyticsPage(req, res) {
   const allData = await URL.find({});
-  console.log(allData);
-  res.render("home", {
+  res.render("analytics", {
     data: allData,
   });
+}
+
+function renderHomePage(req,res){
+  res.render("home")
 }
 
 module.exports = {
   generateShortId,
   getUrlByShortId,
   getAnalyticsByShortId,
-  renderHomepage,
+  renderAnalyticsPage,
+  renderHomePage
 };
