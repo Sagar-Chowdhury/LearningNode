@@ -9,7 +9,7 @@
 5. (`Rabbit Mq`) [https://github.com/Sagar-Chowdhury/RabbitMq-Notes]
 
 
-### Node JS Architecture - Single Threaded Event Loop
+### Internal Working Deep-Dive
 
 *Node JS Single Threaded Event Loop Model*
 As we have already discussed, Node JS applications uses “Single Threaded Event Loop Model” architecture to handle multiple concurrent clients. There are many web application technologies like *JSP, Spring MVC, ASP.NET, HTML, Ajax, jQuery* etc. But all these technologies follow **“Multi-Threaded Request-Response”** architecture to handle multiple concurrent clients. We are already familiar with “Multi-Threaded Request-Response” architecture because it’s used by most of the web application frameworks.
