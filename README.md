@@ -63,7 +63,7 @@ Absolutely! Here are detailed notes on MongoDB, Mongoose, and their integration 
    * **Content Management Systems:** Manage articles, blog posts, and other content.
    * **IoT Applications:**  Handle large volumes of data from sensors and devices.
 
-**Mongoose**
+**Mongoose** [MongoDb and Mongoose](https://www.mongodb.com/developer/languages/javascript/getting-started-with-mongodb-and-mongoose/)
 
 1. **Object Data Modeling (ODM):**
    * **Schema Validation:** Enforce data types, required fields, uniqueness, and custom validation logic.
