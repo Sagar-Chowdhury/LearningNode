@@ -7,6 +7,8 @@
 3. Concept of **Middleware** in node.js [https://expressjs.com/en/guide/using-middleware.html]
 4. (`Docker Notes`) [https://github.com/Sagar-Chowdhury/Docker-Notes]
 5. (`Rabbit Mq`) [https://github.com/Sagar-Chowdhury/RabbitMq-Notes]
+6. (`Quick JS Revision`)[namaste-javascript-notes.pdf](https://github.com/Sagar-Chowdhury/LearningNode/files/15298896/namaste-javascript-notes.pdf)
+
 
 ![image](https://github.com/Sagar-Chowdhury/LearningNode/assets/76145064/1aef645d-ff08-46e9-a1b9-6eaa621faf36)
 
