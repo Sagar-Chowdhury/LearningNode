@@ -1,0 +1,24 @@
+--Request--
+GET  /sample
+--Resposne--
+200  
+--Request--
+GET  /sample
+--Resposne--
+200  
+--Request--
+GET  /sample
+--Resposne--
+200  
+--Request--
+GET  /favicon.ico
+--Resposne--
+200  
+--Request--
+GET  /sample
+--Resposne--
+200  
+--Request--
+GET  /
+--Resposne--
+200  
