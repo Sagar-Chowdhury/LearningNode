@@ -269,6 +269,10 @@ Node.js leverages a built-in internal thread pool to offload certain potentially
 It's more accurate to describe Node.js as having a single-threaded architecture augmented by a thread pool to optimize specific operations. The single-threaded event loop remains the centerpiece of its execution model.
 
 
+### JWT Authentication
+
+![image](https://github.com/Sagar-Chowdhury/LearningNode/assets/76145064/20fe5266-f273-4add-9365-328f36aa84e4)
+
 
 
 
