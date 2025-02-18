@@ -268,6 +268,43 @@ Node.js leverages a built-in internal thread pool to offload certain potentially
 
 It's more accurate to describe Node.js as having a single-threaded architecture augmented by a thread pool to optimize specific operations. The single-threaded event loop remains the centerpiece of its execution model.
 
+```
+sequenceDiagram
+    participant Sync as Synchronous Code
+    participant Micro as Microtasks\n(process.nextTick, Promise.then)
+    participant Timers as Timers\n(setTimeout, setInterval)
+    participant Pending as Pending Callbacks
+    participant Poll as Poll Phase\n(I/O callbacks, e.g., fs.readFile)
+    participant Check as Check Phase\n(setImmediate)
+    participant Close as Close Callbacks
+    participant NextLoop as Next Iteration
+
+    Note over Sync, Micro: **Start of Execution**
+    Sync->>Sync: Execute synchronous code
+    Sync->>Micro: Schedule microtasks (nextTick, Promise callbacks)
+    Micro-->>Sync: Execute microtasks immediately after Sync
+
+    Note over Timers: **Timers Phase**
+    Sync->>Timers: Enter Timers Phase (callbacks ready after delay)
+    Timers->>Micro: Execute microtasks scheduled during Timers
+    Timers->>Pending: Transition to Pending Callbacks
+
+    Note over Poll: **Poll Phase**
+    Pending->>Poll: Enter Poll Phase (I/O events, e.g., fs.readFile)
+    Poll->>Micro: Process microtasks scheduled during Poll
+
+    Note over Check: **Check Phase**
+    Poll->>Check: Transition to Check Phase (setImmediate callbacks)
+    Check->>Micro: Execute microtasks scheduled during Check
+
+    Note over Close: **Close Callbacks Phase**
+    Check->>Close: Process close callbacks (e.g., socket close events)
+    Close->>NextLoop: End current iteration
+
+    NextLoop->>Sync: Begin next event loop iteration
+
+```
+
 
 ### JWT Authentication
 
